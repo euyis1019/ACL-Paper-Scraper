@@ -1,0 +1,14 @@
+{
+  "total_papers": 2166,
+  "by_status": {
+    "submitted": 2166
+  },
+  "by_venue": {
+    "aclweb.org/ACL/ARR/2024/June": 1742,
+    "aclweb.org/ACL/ARR/2024/April": 276,
+    "aclweb.org/ACL/ARR/2024/August": 148
+  },
+  "accepted": 0,
+  "rejected": 0,
+  "scraped_at": "2025-12-07T00:21:47.923633"
+}

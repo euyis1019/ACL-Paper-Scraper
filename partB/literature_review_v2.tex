@@ -1,0 +1,60 @@
+\section{Literature Review}
+
+Automated evaluation of academic papers lies at the intersection of natural language processing, machine learning, and scholarly communication. This section surveys the evolution from traditional automated essay scoring (AES) to contemporary LLM-based approaches, examines multi-agent consensus mechanisms, and identifies research gaps motivating HorizonBench. Figure~\ref{fig:taxonomy} provides a visual taxonomy of this evolution.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/taxonomy.pdf}
+    \caption{Taxonomy of Automated Academic Assessment: Technical Evolution and Research Gap Analysis. The diagram traces three eras of development and maps identified research gaps to HorizonBench solutions.}
+    \label{fig:taxonomy}
+\end{figure}
+
+\subsection{Automated Essay Scoring: From Feature Engineering to Deep Learning}
+
+The field of Automated Essay Scoring originated in the 1960s with Page's Project Essay Grade (PEG), which employed surface-level features such as sentence length and lexical complexity~\cite{page1966imminence}. While PEG demonstrated feasibility, its reliance on superficial proxies precluded evaluation of argumentative logic---limitations pronounced when assessing academic papers where methodological rigor constitutes primary value.
+
+The Educational Testing Service's e-rater advanced the field by integrating grammar detection and coherence features with machine learning~\cite{burstein1998automated}. However, dependence on manually crafted features limited generalization to academic-specific dimensions such as experimental design validity.
+
+The deep learning era brought substantial improvements. Taghipour and Ng~\cite{taghipour2016neural} introduced BiLSTM architectures for document-level semantic understanding. Dong et al.~\cite{dong2017attention} combined CNNs with attention mechanisms for local pattern capture. Transformer-based approaches subsequently achieved state-of-the-art results: Wang et al.~\cite{wang2022bert} proposed multi-scale BERT representations, while hybrid approaches combining RoBERTa with linguistic features demonstrated QWK scores exceeding 0.92~\cite{iqbal2024hybrid}.
+
+However, Misgna et al.~\cite{misgna2024survey} emphasize that feedback generation remains largely overlooked. Deep learning models capture general logical patterns but cannot interpret specialized technical logic---for instance, evaluating whether an ablation study sufficiently covers key variables.
+
+\subsection{LLM-Based Automated Scholarly Paper Review}
+
+Large Language Models have catalyzed a paradigm shift toward Automated Scholarly Paper Review (ASPR). A comprehensive survey by Tan et al.~\cite{tan2025llm} documents this transformation, noting that LLMs' long-context capabilities enable simulation of complete review processes. Systems like ReviewMT~\cite{tan2024reviewmt} convert peer review into multi-turn dialogues with LLMs acting as authors, reviewers, and decision-makers.
+
+Zhou et al.~\cite{zhou2024llm} evaluated LLM reliability using the RR-MCQ benchmark from ICLR-2023. Their findings reveal that while LLMs achieve passable accuracy (>60\%) on single options, completely correct answers remain rare (~20\%), with particular weakness in long paper processing and critical feedback generation.
+
+OpenReviewer~\cite{openreviewer2024} fine-tuned Llama on 79,000 reviews from top ML conferences, demonstrating that specialized training can overcome LLMs' tendency toward overly positive assessments. The SEA framework~\cite{sea2024} introduces cross-venue standardization with self-correction strategies. AGENTREVIEW~\cite{jin2024agentreview} simulates peer review dynamics with LLM agents, enabling controlled experiments on review outcomes.
+
+\subsection{Multi-Agent Systems and Consensus Mechanisms}
+
+Recognition that single-model approaches suffer from inherent biases has motivated multi-agent consensus research. D'Arcy et al.~\cite{darcy2024marg} introduced MARG, demonstrating that distributing text across specialized agents with internal discussion reduces generic comments from 60\% to 29\% and doubles high-quality feedback generation.
+
+Guo et al.~\cite{guo2024survey} identify critical collaboration mechanisms: agent profiling, structured communication protocols, and consensus-seeking strategies. Duan et al.~\cite{duan2024consensus} propose third-party LLM integration for uncertainty estimation, effectively mitigating hallucinations in multi-agent systems.
+
+Meta-review synthesis represents another development. Traditional peer review employs Area Chairs to synthesize reviewer assessments; computational approaches have begun exploring automated meta-review generation that resolves conflicts across evaluations~\cite{li2023meta}.
+
+\subsection{Benchmark Datasets and Evaluation Resources}
+
+The seminal PeerRead dataset~\cite{kang2018peerread} provides 14.7K paper drafts with accept/reject decisions from ACL, NIPS, and ICLR, alongside 10.7K expert reviews. Ghosal et al.~\cite{ghosal2022peer} introduced Peer Review Analyze with 1,199 reviews annotated across four dimensions: Section Correspondence, Aspect Category, Functionality, and Significance.
+
+OpenReview~\cite{openreview} provides public access to submissions, reviews, rebuttals, and decisions for ICLR, NeurIPS, and ICML---crucially including rejected submissions essential for understanding acceptance boundaries. The ORB dataset~\cite{orb2023} aggregates over 36,000 submissions and 89,000 reviews with standardized schemas.
+
+For RAG evaluation, RAGBench~\cite{ragbench2024} provides 100K examples with explainable labels. ARES~\cite{ares2024} demonstrates that lightweight fine-tuned judges can accurately evaluate RAG systems with minimal human annotations.
+
+\subsection{Research Gaps and HorizonBench Positioning}
+
+Our analysis identifies five critical gaps that HorizonBench addresses:
+
+\textbf{Gap 1: Static Evaluation Baselines.} Existing systems evaluate against fixed criteria without domain-specific benchmarks. HorizonBench's Deep Research Agent dynamically constructs contextualized benchmarks by retrieving relevant prior work from Semantic Scholar, arXiv, and OpenReview.
+
+\textbf{Gap 2: Numerical Score Instability.} LLMs produce different scores across repeated runs~\cite{zhou2024llm}. HorizonBench adopts grade-based ratings (Strong Accept through Strong Reject) aligned with conference practices, eliminating numerical instability.
+
+\textbf{Gap 3: Single-Model Bias.} Current systems inherit model-specific biases. While MARG~\cite{darcy2024marg} uses multiple agents, they employ the same model. HorizonBench implements heterogeneous multi-model consensus with GPT, Claude, and DeepSeek as reviewers, plus Gemini as independent Meta Reviewer.
+
+\textbf{Gap 4: Process Disconnect.} Existing systems collapse multi-stage review into single-pass generation. HorizonBench models the complete pipeline: independent reviews, conflict resolution, and meta-review synthesis.
+
+\textbf{Gap 5: Limited Rejection Data.} Systems predominantly train on accepted papers. HorizonBench integrates OpenReview rejection data into few-shot prompting, calibrating assessment boundaries with examples spanning Strong Accept to Strong Reject.
+
+Additionally, HorizonBench reconceptualizes sparse retrieval results as a feature: papers with little related literature represent potentially high-novelty contributions, triggering upward adjustment in innovation scores rather than assessment failure.

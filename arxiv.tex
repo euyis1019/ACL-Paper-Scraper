@@ -1,0 +1,255 @@
+\documentclass{article}
+% \usepackage[preprint]{arxiv}
+% \usepackage[nonatbib]{neurips_2025}
+% \usepackage[preprint]{neurips_2025}
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2025
+
+% ready for submission
+% \usepackage{neurips_2025}
+
+% to compile a preprint version, e.g., for submission to arXiv, add the
+% [preprint] option:
+% \usepackage[preprint]{neurips_2025}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+\usepackage[final]{neurips_2025}
+
+% to avoid loading the natbib package, add option nonatbib:
+% \usepackage[nonatbib]{neurips_2025}
+
+\usepackage{natbib}
+\setcitestyle{numbers,square}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts} 
+\usepackage{subfigure}
+\usepackage{graphicx}       % for including graphics
+\usepackage{multirow}       % for \multirow in tables
+\usepackage{color}          % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amsthm}         % 放在导言区
+\usepackage{algorithm}
+\newtheorem{assumption}{Assumption}
+\usepackage{array}
+\usepackage{wrapfig}
+% \usepackage{tcolorbox}
+\usepackage[most]{tcolorbox}
+\usepackage{fontawesome}
+
+\newtcolorbox{promptblue}[1]{
+  colframe=blue!50,         % 顶部和边框
+  colback=gray!2,           % prompt底下的阴影
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  parskip=6pt,
+  before upper=\setlength{\parindent}{0pt},
+  width=\textwidth
+}
+
+\newtcolorbox{promptorange}[1]{
+  colframe=orange!50,
+  colback=gray!2,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  parskip=6pt,
+  before upper=\setlength{\parindent}{0pt},
+  width=\textwidth
+}
+
+\newtcolorbox{promptgreen}[1]{
+  colframe=green!50,
+  colback=gray!2,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  enhanced,
+  sharp corners=south,
+  parskip=6pt,
+  before upper={\setlength{\parindent}{0pt}\sloppy},
+  width=\textwidth
+}
+
+\newtcolorbox{promptpurple}[1]{
+  colframe=purple!50,
+  colback=gray!2,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  enhanced,
+  sharp corners=south,
+  parskip=6pt,
+  before upper={\setlength{\parindent}{0pt}\sloppy},
+  width=\textwidth
+}
+
+\newtcolorbox{promptred}[1]{
+  colframe=red!50,
+  colback=gray!2,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  enhanced,
+  sharp corners=south,
+  parskip=6pt,
+  before upper={\setlength{\parindent}{0pt}\sloppy},
+  width=\textwidth
+}
+
+\newtcolorbox{promptcyan}[1]{
+  colframe=cyan!50,
+  colback=gray!2,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  enhanced,
+  sharp corners=south,
+  parskip=6pt,
+  before upper={\setlength{\parindent}{0pt}\sloppy},
+  width=\textwidth
+}
+
+\newtcolorbox{promptyellow}[1]{
+  colframe=yellow!50!orange,
+  colback=gray!2,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  enhanced,
+  sharp corners=south,
+  parskip=6pt,
+  before upper={\setlength{\parindent}{0pt}\sloppy},
+  width=\textwidth
+}
+
+\newtcolorbox{promptemerald}[1]{
+  colframe=green!80!cyan,
+  colback=green!8!white,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  enhanced,
+  sharp corners=south,
+  parskip=6pt,
+  before upper={\setlength{\parindent}{0pt}\sloppy},
+  width=\textwidth
+}
+
+\newtcolorbox{promptlime}[1]{
+  colframe=lime!80!yellow,
+  colback=lime!10!white,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  enhanced,
+  sharp corners=south,
+  parskip=6pt,
+  before upper={\setlength{\parindent}{0pt}\sloppy},
+  width=\textwidth
+}
+
+\newtcolorbox{promptforest}[1]{
+  colframe=green!90!black,
+  colback=green!15!white,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  enhanced,
+  sharp corners=south,
+  parskip=6pt,
+  before upper={\setlength{\parindent}{0pt}\sloppy},
+  width=\textwidth
+}
+
+\newtcolorbox{promptmint}[1]{
+  colframe=green!50!white,
+  colback=green!3!white,
+  title=#1,
+  fonttitle=\bfseries,
+  breakable,
+  enhanced,
+  sharp corners=south,
+  parskip=6pt,
+  before upper={\setlength{\parindent}{0pt}\sloppy},
+  width=\textwidth
+}
+
+\title{Your Paper Title Here}
+\author{%
+  \textbf{Author Name}${}^{1}$ \quad
+  \textbf{Author Name}${}^{2}$ \\
+  \\
+  ${}^{1}$Institution Name, ${}^{2}$Institution Name \\
+}
+
+\begin{document}
+
+\newcommand{\contactline}[2]{%
+  \vspace{-1.8em}
+  \begin{center}
+    \faEnvelope~\href{mailto:#1}{#1}\quad
+    \faGithub~\href{https://github.com/#2}{#2}
+  \end{center}
+  \vspace{+0.2em}
+}
+
+\maketitle
+\contactline{email@example.com}{your-github/repo-name}
+
+\begin{abstract}
+Your abstract goes here.
+\end{abstract}
+
+\section{Introduction}
+% Your introduction content goes here
+
+\section{Related Works}
+% Your related work content goes here
+
+\section{Preliminaries and Problem Setup}
+% Your problem setup content goes here
+
+\section{Method}
+% Your method content goes here
+
+\subsection{Overview}
+% Method overview
+
+\subsection{Component 1}
+% Component description
+
+\subsection{Component 2}
+% Component description
+
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Experimental Setup}
+% Experimental setup
+
+\subsection{Experimental Results}
+% Results
+
+\section{Conclusion}
+% Your conclusion content goes here
+
+\bibliographystyle{IEEEtran}
+\bibliography{arxiv}
+
+\newpage
+\appendix
+\input{appendix}
+
+\end{document}
