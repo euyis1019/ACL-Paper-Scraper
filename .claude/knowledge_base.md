@@ -1,6 +1,6 @@
 # HorizonBench 项目知识库
 
-> 最后更新: 2025年12月6日
+> 最后更新: 2025年12月7日
 
 ---
 
@@ -656,7 +656,95 @@ flowchart TB
 - ✅ 结构化元数据 (BibTeX 格式)
 - ✅ 免费开放获取
 
-### 4.4 OpenReview 数据覆盖
+### 4.4 已爬取的论文数据 (ACL Paper Scraper)
+
+> **GitHub 仓库**: https://github.com/euyis1019/ACL-Paper-Scraper
+
+我们已经开发了论文爬虫工具并成功爬取了 ACL 2023-2025 的论文数据。
+
+#### 4.4.1 ACL Anthology 爬取结果
+
+| 指标           | 数值          |
+| -------------- | ------------- |
+| **总论文数**   | 10,565 篇     |
+| **数据来源**   | ACL Anthology |
+| **爬取状态**   | ✅ 已完成      |
+
+**按会议分布**:
+
+| 会议  | 论文数 |
+| ----- | ------ |
+| EMNLP | 4,726  |
+| ACL   | 4,262  |
+| NAACL | 1,577  |
+
+**按年份分布**:
+
+| 年份 | 论文数 |
+| ---- | ------ |
+| 2025 | 4,970  |
+| 2024 | 3,154  |
+| 2023 | 2,441  |
+
+**每篇论文包含的元数据**:
+- `paper_id`: 论文唯一标识符
+- `title`: 论文标题
+- `authors`: 作者列表
+- `venue`: 会议名称 (ACL/EMNLP/NAACL)
+- `track`: 论文类型 (long/short/demo/srw)
+- `year`: 发表年份
+- `url`: 论文页面 URL
+- `status`: 论文状态 (accepted)
+
+#### 4.4.2 OpenReview ARR 爬取结果
+
+| 指标             | 数值              |
+| ---------------- | ----------------- |
+| **总论文数**     | 2,166 篇          |
+| **数据来源**     | OpenReview (ARR)  |
+| **覆盖周期**     | 2024年各月度cycle |
+
+**按投稿周期分布**:
+
+| ARR Cycle   | 论文数 |
+| ----------- | ------ |
+| June 2024   | 1,742  |
+| April 2024  | 276    |
+| August 2024 | 148    |
+
+**每篇论文包含的元数据**:
+- `paper_id`: OpenReview ID
+- `title`: 论文标题
+- `authors`: 作者列表
+- `abstract`: 论文摘要
+- `keywords`: 关键词
+- `venue_id`: ARR Cycle
+- `status`: 投稿状态
+- `decision`: 评审决定 (如有)
+- `url`: OpenReview 页面 URL
+- `pdf_url`: PDF 下载链接
+
+#### 4.4.3 爬虫工具
+
+代码位于 `code/` 目录下:
+
+| 文件                    | 功能                        |
+| ----------------------- | --------------------------- |
+| `acl_scraper.py`        | ACL Anthology 爬虫          |
+| `openreview_scraper.py` | OpenReview ARR 爬虫         |
+| `run_all.py`            | 组合运行脚本                |
+| `requirements.txt`      | Python 依赖                 |
+| `data/`                 | 爬取的数据 (CSV/JSON 格式)  |
+
+**使用方法**:
+```bash
+cd code
+pip install -r requirements.txt
+python acl_scraper.py --venues acl emnlp naacl --years 2023 2024 2025
+python openreview_scraper.py --mode arr --years 2024
+```
+
+### 4.5 OpenReview 数据覆盖
 
 | 会议    | 数据完整度 |
 | ------- | ---------- |
@@ -690,6 +778,9 @@ flowchart TB
 - PeerRead: https://github.com/allenai/PeerRead
 - ACL Anthology: https://aclanthology.org/
 - OpenReview: https://openreview.net/
+- **ACL Paper Scraper (本项目)**: https://github.com/euyis1019/ACL-Paper-Scraper
+  - 已爬取 ACL/EMNLP/NAACL 2023-2025 共 10,565 篇论文
+  - 已爬取 OpenReview ARR 2024 共 2,166 篇论文
 
 ### 工具
 - MinerU (Magic-PDF): PDF 解析
